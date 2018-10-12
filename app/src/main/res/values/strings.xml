@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Job</string>
-    <string name="print">print</string>
+    <string name="print">Print</string>
     <string name="downloading">Downloading budget \n please wait</string>
     <string name="loading">Loading budget</string>
+    <string name="network_error">Network error \n try again</string>
 </resources>

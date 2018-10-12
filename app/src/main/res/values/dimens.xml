@@ -1,0 +1,4 @@
+<resources>
+   <dimen name="button_text_size">19sp</dimen>
+    <dimen name="button_margin">12dp</dimen>
+</resources>

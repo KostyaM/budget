@@ -15,7 +15,9 @@ interface IStart {
         fun enableButton()
         fun setDownloadProgress()
         fun setLoadProgress()
+        fun setNetworkError()
         fun startScan()
+        fun goBAck()
     }
 
     interface Presenter {
@@ -23,7 +25,7 @@ interface IStart {
         fun printButtonClicked()
         fun downloadFinished(PDFFile: File)
         fun pdfLoadFinished()
-
         fun startWork(result: String?)
+        fun networkProblem()
     }
 }

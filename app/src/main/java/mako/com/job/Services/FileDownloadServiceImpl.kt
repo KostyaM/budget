@@ -7,6 +7,7 @@ import java.io.File
 import java.io.FileOutputStream
 import java.net.URL
 import android.os.Environment.getExternalStorageDirectory
+import java.lang.Exception
 
 
 class FileDownloadServiceImpl(val presenter: IStart.Presenter) : FileDownloadService {
@@ -21,12 +22,16 @@ class FileDownloadServiceImpl(val presenter: IStart.Presenter) : FileDownloadSer
 
     inner class Downloader(val url: String) : AsyncTask<Void, Void, String>() {
         override fun doInBackground(vararg params: Void?): String? {
-            val input = URL(url).openStream()
-            val output = FileOutputStream(PDFFile)
-            input.use { _ ->
-                output.use { _ ->
-                    input.copyTo(output)
+            try {
+                val input = URL(url).openStream()
+                val output = FileOutputStream(PDFFile)
+                input.use { _ ->
+                    output.use { _ ->
+                        input.copyTo(output)
+                    }
                 }
+            }catch (e:Exception){
+                return "fail"
             }
 
             return "done"
@@ -34,7 +39,8 @@ class FileDownloadServiceImpl(val presenter: IStart.Presenter) : FileDownloadSer
 
         override fun onPostExecute(result: String?) {
             super.onPostExecute(result)
-            presenter.downloadFinished(PDFFile)
+            if(result.equals("done")) presenter.downloadFinished(PDFFile) else presenter.networkProblem()
+
         }
     }
 

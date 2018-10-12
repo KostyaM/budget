@@ -74,11 +74,16 @@ class StartActivity : AppCompatActivity(), IStart.View, OnDrawListener {
     }
 
     override fun setDownloadProgress() {
+        findViewById<TextView>(R.id.error).visibility=View.GONE
         findViewById<TextView>(R.id.progress_text).text = getText(R.string.downloading)
     }
 
     override fun setLoadProgress() {
         findViewById<TextView>(R.id.progress_text).text = getText(R.string.loading)
+    }
+
+    override fun setNetworkError() {
+        findViewById<TextView>(R.id.error).visibility=View.VISIBLE
     }
 
     override fun hideProgress() {
@@ -96,5 +101,14 @@ class StartActivity : AppCompatActivity(), IStart.View, OnDrawListener {
     override fun startScan() {
         val intent = Intent(this@StartActivity, mako.com.job.UI.Camera.CameraActivity::class.java)
         startActivity(intent)
+    }
+
+    override fun onBackPressed() {
+        val intent = Intent(this@StartActivity, mako.com.job.UI.Camera.CameraActivity::class.java)
+        startActivity(intent)
+    }
+
+    override fun goBAck() {
+        onBackPressed()
     }
 }
